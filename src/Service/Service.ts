@@ -1,9 +1,14 @@
 import "reflect-metadata";
-import {isService, isServiceExecutable} from "../consts/metadata";
+import {injectableUniqueName, isService, isServiceExecutable} from "../consts/metadata";
+import {getUniqueName} from "../utils/getUniqueName";
 
-export function Service(target) {
-    Reflect.defineMetadata(isService, true, target)
-    if (target.exec === 'function') {
-        Reflect.defineMetadata(isServiceExecutable, true, target)
+export function Service(uniqueName?: string) {
+    return function (target) {
+        Reflect.defineMetadata(injectableUniqueName, getUniqueName(target, uniqueName), target)
+        Reflect.defineMetadata(isService, true, target)
+        if (target.exec === 'function') {
+            Reflect.defineMetadata(isServiceExecutable, true, target)
+        }
     }
+
 }

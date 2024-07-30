@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonJS",
+    "noImplicitAny": false,
+    "noUnusedLocals": false,
+    "removeComments": true,
+    "noLib": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "useUnknownInCatchVariables": false,
+    "target": "ES2021",
+    "sourceMap": true,
+    "allowJs": false,
+    "outDir": "dist",
+    "baseUrl": "."
+  },
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.m.ts"]
+}
