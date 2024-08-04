@@ -1,9 +1,9 @@
 import {ReactNode} from "react";
 
-interface PreWidget extends Function {
-    prototype: ProtoWidget
+export interface PreWidget extends Function {
+    prototype: WidgetInstance
 }
 
-interface ProtoWidget {
+export interface WidgetInstance {
     exec(): ReactNode
 }
