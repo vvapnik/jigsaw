@@ -1,6 +1,6 @@
 import {ReactNode} from "react";
 
-interface Widgetable extends Function {
+interface PreWidget extends Function {
     prototype: ProtoWidget
 }
 
