@@ -5,6 +5,9 @@ import {Widget} from "../../../Widget/Widget";
 describe('Page/utils/metaValidations', () => {
     it('validateService should reject not a service', () => {
         class NotAService {
+            async exec(){
+
+            }
         }
 
         expect(() => validateService(NotAService)).toThrow('NotAService is not a service')
@@ -12,7 +15,9 @@ describe('Page/utils/metaValidations', () => {
     it('validateService should pass with proper service', () => {
         @Service()
         class RealService {
+            async exec(){
 
+            }
         }
 
         expect(validateService(RealService)).toBeTruthy()
@@ -20,7 +25,7 @@ describe('Page/utils/metaValidations', () => {
     it('should validate widget', () => {
         @Widget()
         class RealWidget {
-            exec() {
+            async resolve() {
                 return ''
             }
         }
@@ -30,7 +35,7 @@ describe('Page/utils/metaValidations', () => {
     it('should throw a error for invalid widget', () => {
 
         class FakeWidget {
-            exec() {
+            async resolve() {
                 return ''
             }
         }
