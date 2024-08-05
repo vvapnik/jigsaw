@@ -1,30 +1,30 @@
 import {PreWidget, WidgetInstance} from "../Widget/types";
 import {Layout} from "../Layout/types";
-import {PreService, ServiceInstance} from "../Service/types";
-import {validateService, validateWidget} from "./utils/metaValidations";
-import {matchServiceInjections} from "./utils/matchServiceInjections";
+import {PreService} from "../Service/types";
+import {validateWidget} from "./utils/metaValidations";
+import {ServicePool} from "./ServicePool";
+import {matchInjections} from "./utils/matchInjections";
+import {getInjectableMetadata} from "./utils/getInjectableMetadata";
 
 export class Page {
-    protected services: ServiceInstance[] = []
     protected widgets: WidgetInstance[] = []
+    protected services: ServicePool
 
     constructor(services: PreService[],
                 widgets: PreWidget[],
                 protected layout: Layout) {
 
-        services.forEach(service => this.initService(service))
+        this.services = new ServicePool(services)
+        widgets.forEach(widget => this.initWidget(widget))
     }
 
-    private initService(service: PreService) {
-        if (!validateService(service)) return
-        const params = matchServiceInjections(service, this.services)
-        this.services.push(service(params))
-    }
 
     private initWidget(widget: PreWidget) {
         if (!validateWidget(widget)) return
-        const params = matchServiceInjections(widget, this.services)
+        const metadata = getInjectableMetadata(widget)
+        const params = matchInjections(metadata, this.services)
         this.widgets.push(widget(params))
     }
+
 
 }
