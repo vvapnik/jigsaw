@@ -7,7 +7,7 @@ describe('Widget', () => {
     it('should assign metadata', () => {
         @Widget()
         class TestWidget implements WidgetInstance{
-            exec() {
+            async resolve() {
                 return ''
             }
         }

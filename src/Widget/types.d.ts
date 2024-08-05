@@ -5,5 +5,5 @@ export interface PreWidget extends Function {
 }
 
 export interface WidgetInstance {
-    exec(): ReactNode
+    resolve(): Promise<ReactNode>
 }
