@@ -8,6 +8,5 @@ export const injectableUniqueName = makeMetadataKey('uniqueName')
 
 export const isWidget = makeMetadataKey('isWidget', 'widget')
 
-export const isLayout = makeMetadataKey('isLayout', 'layout')
 
 export const paramTypes = 'design:paramtypes'
