@@ -4,7 +4,7 @@ import {PoolStatus} from "./ServicePool.c";
 //TODO: check config
 // @ts-ignore
 import {InjectableMetadata, ServiceState} from "./types.d.ts";
-import {getInjectableMetadata} from "./utils/metadata/getInjectableMetadata";
+import {getInjectableMetadata} from "./utils/getInjectableMetadata";
 import {validateService} from "./utils/metaValidations";
 import {matchInjections} from "./utils/matchInjections";
 
@@ -30,10 +30,6 @@ export class ServicePool {
         })
     }
 
-    public async execServices() {
-
-
-    }
 
     public getServiceByClass(target: PreService): ServiceState {
         const service = this.services.find(serv => serv.mainClass === target)
