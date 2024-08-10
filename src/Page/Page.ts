@@ -1,7 +1,7 @@
 import {PreWidget, WidgetInstance} from "../Widget/types";
 import {Layout} from "../Layout/types";
 import {PreService} from "../Service/types";
-import {validateWidget} from "./utils/metaValidations";
+import {validateWidget} from "./utils/metaValidation";
 import {ServicePool} from "./ServicePool";
 import {matchInjections} from "./utils/matchInjections";
 import {getInjectableMetadata} from "./utils/getInjectableMetadata";

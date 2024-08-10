@@ -5,7 +5,7 @@ import {PoolStatus} from "./ServicePool.c";
 // @ts-ignore
 import {InjectableMetadata, ServiceState} from "./types.d.ts";
 import {getInjectableMetadata} from "./utils/getInjectableMetadata";
-import {validateService} from "./utils/metaValidations";
+import {validateService} from "./utils/metaValidation";
 import {matchInjections} from "./utils/matchInjections";
 
 export class ServicePool {

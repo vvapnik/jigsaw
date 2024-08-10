@@ -1,6 +1,5 @@
 import {makeMetadataKey} from "../utils/makeMetadataKey/makeMetadataKey";
 
-export const propTypes = 'design:paramtypes'
 export const isService = makeMetadataKey('isService', 'service')
 export const isServiceExecutable = makeMetadataKey('isExecutable', 'service')
 

@@ -1,6 +1,6 @@
-import {validateService, validateWidget} from "./index";
-import {Service} from "../../../Service";
-import {Widget} from "../../../Widget/Widget";
+import {validateService, validateWidget} from "./metaValidation";
+import {Service} from "../../Service";
+import {Widget} from "../../Widget/Widget";
 
 describe('Page/utils/metaValidations', () => {
     it('validateService should reject not a service', () => {
