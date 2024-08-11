@@ -6,25 +6,36 @@ import {ServicePool} from "./ServicePool";
 import {matchInjections} from "./utils/matchInjections";
 import {getInjectableMetadata} from "./utils/getInjectableMetadata";
 
-export class Page {
-    protected widgets: WidgetInstance[] = []
-    protected services: ServicePool
+export async function Page(services: PreService[],
+                           preWidgets: PreWidget[],
+                           Layout: Layout) {
 
-    constructor(services: PreService[],
-                widgets: PreWidget[],
-                protected layout: Layout) {
-
-        this.services = new ServicePool(services)
-        widgets.forEach(widget => this.initWidget(widget))
+    const servicesPool = new ServicePool(services)
+    const widgets = initWidgets(preWidgets, servicesPool)
+    await servicesPool.executeServices()
+    const resolvedWidgets = {}
+    const resolvePromises = []
+    for (let widgetName in widgets) {
+        if (!widgets.hasOwnProperty(widgetName)) continue
+        const resolvePromise = widgets[widgetName].resolve()
+            .then(resolvedWidget => resolvedWidgets[widgetName] = resolvedWidget)
+        resolvePromises.push(resolvePromise)
     }
+    await Promise.all(resolvePromises)
+    return Layout(resolvedWidgets)
+}
 
+function initWidgets(widgets: PreWidget[], services: ServicePool): Record<string, WidgetInstance> {
+    return widgets.reduce((widgetsCollection, preWidget) => {
+        if (!validateWidget(preWidget)) throw Error('Invalid Widget')
 
-    private initWidget(widget: PreWidget) {
-        if (!validateWidget(widget)) return
-        const metadata = getInjectableMetadata(widget)
-        const params = matchInjections(metadata, this.services)
-        this.widgets.push(widget(params))
-    }
+        const metadata = getInjectableMetadata(preWidget)
+        const params = matchInjections(metadata, services)
 
+        if (widgetsCollection[metadata.uniqueName]) throw Error(`widget name '${metadata.uniqueName} is not unique`)
 
+        widgetsCollection[metadata.uniqueName] = new preWidget(params)
+
+        return widgetsCollection
+    }, {})
 }
