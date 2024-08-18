@@ -12,7 +12,7 @@ const config = {
         "^.+\\.(mt|t|cj|j)s$": [
             "ts-jest",
             {
-                tsonfig: 'tsconfig.jest.json'
+                tsonfig: 'tsconfig.spec.json'
             }
         ]
     }
