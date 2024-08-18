@@ -1,6 +1,6 @@
-import {PreWidget, WidgetInstance} from "../Widget/types";
-import {Layout} from "../Layout/types";
-import {PreService} from "../Service/types";
+import {PreWidget, WidgetInstance} from "../Widget";
+import {Layout} from "../Layout";
+import {PreService} from "../Service";
 import {validateWidget} from "./utils/metaValidation";
 import {ServicePool} from "./ServicePool";
 import {matchInjections} from "./utils/matchInjections";
