@@ -8,7 +8,7 @@ import {getInjectableMetadata} from "./utils/getInjectableMetadata";
 
 export async function Page(services: PreService[],
                            preWidgets: PreWidget[],
-                           Layout: Layout) {
+                           layout: Layout) {
 
     const servicesPool = new ServicePool(services)
     const widgets = initWidgets(preWidgets, servicesPool)
@@ -22,7 +22,7 @@ export async function Page(services: PreService[],
         resolvePromises.push(resolvePromise)
     }
     await Promise.all(resolvePromises)
-    return Layout(resolvedWidgets)
+    return layout(resolvedWidgets)
 }
 
 function initWidgets(widgets: PreWidget[], services: ServicePool): Record<string, WidgetInstance> {
