@@ -20,11 +20,12 @@ export class ServicePool {
         validateService(service)
         const metadata = getInjectableMetadata(service)
         const dependencies = matchInjections(metadata, this)
+        const instance = new (service)(...(dependencies.map(state => state.instance)))
         this.services.push({
             ...metadata,
             mainClass: service,
             executed: false,
-            instance: new service(...dependencies.map(state => state.instance)),
+            instance,
             dependencies
         })
     }
