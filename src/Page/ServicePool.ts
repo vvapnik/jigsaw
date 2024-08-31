@@ -1,4 +1,4 @@
-import {PreService} from "../Service/types";
+import {PreService} from "../Service";
 import {PoolStatus} from "./ServicePool.c";
 
 import {ServiceState} from "./types";
@@ -24,7 +24,7 @@ export class ServicePool {
             ...metadata,
             mainClass: service,
             executed: false,
-            instance: new service(),
+            instance: new service(...dependencies.map(state => state.instance)),
             dependencies
         })
     }

@@ -30,11 +30,11 @@ function initWidgets(widgets: PreWidget[], services: ServicePool): Record<string
         if (!validateWidget(preWidget)) throw Error('Invalid Widget')
 
         const metadata = getInjectableMetadata(preWidget)
-        const params = matchInjections(metadata, services)
+        const params = matchInjections(metadata, services).map(state=>state.instance)
 
         if (widgetsCollection[metadata.uniqueName]) throw Error(`widget name '${metadata.uniqueName} is not unique`)
 
-        widgetsCollection[metadata.uniqueName] = new preWidget(params)
+        widgetsCollection[metadata.uniqueName] = new preWidget(...params)
 
         return widgetsCollection
     }, {})

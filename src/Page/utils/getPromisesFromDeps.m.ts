@@ -38,7 +38,7 @@ export const ServiceWithoutDepsExecutedState: ServiceState = {
 
 @Service()
 class ServiceWithDeps {
-    constructor(private service1: ServiceWithoutDeps, private service2: ServiceWithoutDepsExecuted) {
+    constructor(private _: ServiceWithoutDeps, private __: ServiceWithoutDepsExecuted) {
     }
 
     async exec() {
@@ -52,5 +52,5 @@ export const ServiceWithDepsState: ServiceState = {
     mainClass: ServiceWithDeps,
     executed: false,
     dependencies: [ServiceWithoutDepsState],
-    instance: new ServiceWithDeps(ServiceWithoutDepsState.instance, ServiceWithoutDepsExecutedState.instance)
+    instance: new ServiceWithDeps(ServiceWithoutDepsState.instance as ServiceWithoutDeps, ServiceWithoutDepsExecutedState.instance as ServiceWithoutDepsExecuted)
 }

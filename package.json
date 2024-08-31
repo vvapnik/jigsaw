@@ -1,6 +1,6 @@
 {
   "name": "@vapnik/jigsaw",
-  "version": "0.0.1-alpha6",
+  "version": "0.0.1-alpha17",
   "license": "MIT",
   "description": "Simple framework for reusable UI",
   "author": "Vladislav Vapnik <vladislavvapnik@gmail.com>",
@@ -24,8 +24,10 @@
     "ts-node": "10.9.2"
   },
   "scripts": {
-    "test": "jest",
     "build": "tsc & npm run copy-dts",
-    "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist"
+    "copy-dts": "copyfiles -u 1 \"src/**/*.d.ts\" dist",
+    "release": "npm run build & npm publish",
+    "run": "ts-node ./src/index.ts",
+    "test": "jest"
   }
 }

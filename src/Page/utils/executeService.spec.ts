@@ -61,7 +61,7 @@ describe('Page/utils/executeService', () => {
         const parentServiceState: ServiceState = {
             dependencies: [stoppedServiceState],
             executed: false,
-            instance: new ParentService(stoppedServiceState.instance),
+            instance: new ParentService(stoppedServiceState.instance as StoppedService),
             mainClass: ParentService,
             params: [StoppedService],
             uniqueName: ""

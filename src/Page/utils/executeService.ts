@@ -3,11 +3,12 @@ import {getPromisesFromDeps} from "./getPromisesFromDeps";
 
 export function executeService(service: ServiceState) {
     const preConditions = getPromisesFromDeps(service)
+    const exec = service.instance.exec ?? (() => Promise.resolve())
     let currentPromise
     if (preConditions.length) {
-        currentPromise = Promise.all(preConditions).then(service.instance.exec)
+        currentPromise = Promise.all(preConditions).then(exec)
     } else {
-        currentPromise = service.instance.exec()
+        currentPromise = exec()
     }
     service.executionPromise = currentPromise.then(() => {
         service.executed = true
